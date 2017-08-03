@@ -35,6 +35,6 @@ Após uma reunião com o senhor Geraldo, um grupos de analistas concluíram que 
 
 ## Instruções para a realização da prova ##
 1. O SGBD deve ser MYSql, Postgree ou Sql Server.
-2. Deve ser desenvolvida na linguagem C#, utilizando NHibernate **ou** Entity para o mapeamento dos objetos.
-3. Deve-se realizar um **commit** toda vez que começar a se desenvolver, e outro quando parar. Ex de mensagem: "Iniciando DD/MM/YYYY" ou "Finalizando DD/MM/YYYY".
-4. Podem ser realizados inúmeros commits, desde que a regra acima seja respeitada.
+2. Deve ser desenvolvida na linguagem C# MVC, utilizando NHibernate **ou** Entity para o mapeamento dos objetos.
+3. Alterar o arquivo "standup.txt" cada vez que for realizar algo no sistema, com data de início da tarefa, data de finalização e o que foi/será realizado.
+4. Podem ser realizados inúmeros commits.
