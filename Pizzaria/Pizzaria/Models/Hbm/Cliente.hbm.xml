@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Pizzaria" namespace="Pizzaria.Models.Entity" >
+  <class name="Cliente" table="pz_cliente">
+    <id name="Id" column="id_cliente" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    
+    <property column="nome_cliente" type="String" length="100" name="Nome" not-null="true"/>
+    <property column="cpf" type="String" length="14" name="Cpf" not-null="true"/>
+    <property column="email" type="String" length="200" name="Email" />
+    <property column="telefone" type="String" length="20" name="Telefone" not-null="true" />
+
+	<many-to-one name="Endereco" column="id_endereco" class="Endereco" lazy="false" not-null="true" cascade="all"/>
+
+	<bag name="Pedidos" inverse="true">
+		<key column="id_pedido" />
+		<one-to-many class="Pedido" />
+	</bag>
+	
+  </class>
+</hibernate-mapping>
