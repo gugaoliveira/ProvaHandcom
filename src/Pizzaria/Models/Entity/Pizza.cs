@@ -1,4 +1,5 @@
 ﻿using Pizzaria.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Entity
 {
@@ -10,11 +11,13 @@ namespace Pizzaria.Models.Entity
         /// <summary>
         /// Sabor da pizza
         /// </summary>
+        [Display(Name = "Sabor")]
         public virtual SaborPizza Sabor { get; set;}
 
         /// <summary>
         /// Tamanho da pizza
         /// </summary>
+        [Display(Name = "Tamanho")]
         public virtual TamanhoPizza Tamanho { get; set;}
 	}
 }

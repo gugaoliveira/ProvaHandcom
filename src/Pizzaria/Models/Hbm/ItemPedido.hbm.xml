@@ -7,7 +7,7 @@
     </id>
     <property column="quantidade" type="Int32" name="Quantidade" not-null="true" />
     <property column="observacao" type="String" name="Observacao" length="255" />
-	<many-to-one name="Produto" column="id_produto" class="Produto" lazy="false" />
-
+	  <many-to-one name="Produto" column="id_produto" class="Produto" not-null="true"/>
+    <many-to-one name="Pedido" column="id_pedido" class="Pedido" not-null="true"/>
   </class>
 </hibernate-mapping>

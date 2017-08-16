@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,14 +16,16 @@ namespace Pizzaria.Models.Entity
 		/// </summary>
         public virtual int Id { get; set; }
 
-		/// <summary>
-		/// Nome do estado
-		/// </summary>
+        /// <summary>
+        /// Nome do estado
+        /// </summary>
+        [Display(Name = "Nome do Estado")]
         public virtual string Nome { get; set; }
 
-		/// <summary>
-		/// Sigla do estado. Ex.: MG, SP
-		/// </summary>
+        /// <summary>
+        /// Sigla do estado. Ex.: MG, SP
+        /// </summary>
+        [Display(Name = "Sigla")]
         public virtual string Sigla { get; set; }        
     }
 }

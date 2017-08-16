@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Entity
 {
@@ -9,9 +10,16 @@ namespace Pizzaria.Models.Entity
 	/// </summary>
 	public class Pedido : BaseEntity
     {
-		/// <summary>
-		/// Código do pedido
-		/// </summary>
+        protected Pedido() { }
+
+        public Pedido(Cliente cliente)
+        {
+            this.Cliente = cliente;
+        }
+
+        /// <summary>
+        /// Código do pedido
+        /// </summary>
         public virtual int Id { get; set; }
 
 		/// <summary>
@@ -19,20 +27,22 @@ namespace Pizzaria.Models.Entity
 		/// </summary>
         public virtual Cliente Cliente { get; set; }
 
-		/// <summary>
-		/// Data e hora em que o pedido foi criado
-		/// </summary>
-		public virtual DateTime DataPedido { get; set; } = DateTime.Now;
+        /// <summary>
+        /// Data e hora em que o pedido foi criado
+        /// </summary>
+        [DataType(DataType.DateTime)]
+        public virtual DateTime DataPedido { get; set; } = DateTime.Now;
 
-		/// <summary>
-		/// Data e hora em que o pedido foi entregue
-		/// </summary>
-		public virtual DateTime? DataEntrega { get; set; }
+        /// <summary>
+        /// Data e hora em que o pedido foi entregue
+        /// </summary>
+        [DataType(DataType.DateTime)]
+        public virtual DateTime? DataEntrega { get; set; }
 
 		/// <summary>
 		/// Lista de itens do pedido
 		/// </summary>
-		public virtual List<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
+		public virtual IList<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
 
 		/// <summary>
 		/// Valor total do pedido

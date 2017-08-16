@@ -7,6 +7,15 @@ namespace Pizzaria.Models.Entity
 {
 	public class ItemPedido : BaseEntity
 	{
+        protected ItemPedido()
+        {
+        }
+
+        public ItemPedido(Pedido pedido)
+        {
+            this.Pedido = pedido;
+        }
+
         /// <summary>
         /// Código do item
         /// </summary>
@@ -26,5 +35,7 @@ namespace Pizzaria.Models.Entity
         /// Produto ex.: pizza, bebida ou sobremesa
         /// </summary>
         public virtual Produto Produto { get; set; }
-	}
+
+        public virtual Pedido Pedido { get; set; }
+    }
 }

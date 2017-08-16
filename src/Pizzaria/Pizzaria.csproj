@@ -147,10 +147,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SobremesaController.cs" />
+    <Compile Include="Controllers\BebidaController.cs" />
+    <Compile Include="Controllers\PizzaController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\PedidoDAO.cs" />
     <Compile Include="Models\Entity\BaseEntity.cs" />
     <Compile Include="Models\Entity\Bebida.cs" />
     <Compile Include="Models\Entity\Cidade.cs" />
@@ -159,6 +167,7 @@
     <Compile Include="Models\Entity\Estado.cs" />
     <Compile Include="Models\Entity\ItemPedido.cs" />
     <Compile Include="Models\Entity\Pedido.cs" />
+    <Compile Include="Models\Enum\Enumerador.cs" />
     <Compile Include="Models\Enum\SaborPizza.cs" />
     <Compile Include="Models\Entity\Pizza.cs" />
     <Compile Include="Models\Entity\Sobremesa.cs" />
@@ -218,9 +227,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Cliente\Lista.cshtml" />
+    <Content Include="Views\Pedido\Lista.cshtml" />
+    <Content Include="Views\Relatorio\Lista.cshtml" />
+    <Content Include="Views\Cliente\Cadastro.cshtml" />
+    <Content Include="Views\Produto\Lista.cshtml" />
+    <Content Include="Views\Pizza\Cadastro.cshtml" />
+    <Content Include="Views\Pizza\Lista.cshtml" />
+    <Content Include="Views\Bebida\Cadastro.cshtml" />
+    <Content Include="Views\Bebida\Lista.cshtml" />
+    <Content Include="Views\Sobremesa\Cadastro.cshtml" />
+    <Content Include="Views\Sobremesa\Lista.cshtml" />
+    <Content Include="Views\Pedido\Cadastro.cshtml" />
+    <Content Include="Views\Pedido\_ModalSelecionarCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

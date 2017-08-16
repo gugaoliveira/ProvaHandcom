@@ -5,9 +5,14 @@
     <id name="Id" column="id_pedido" type="Int32" unsaved-value="0">
       <generator class="native"/>
     </id>
-    <many-to-one name="Cliente" column="id_cliente" class="Cliente" />
+    <many-to-one name="Cliente" column="id_cliente" class="Cliente" lazy="false"/>
     <property column="data_pedido" type="DateTime" name="DataPedido" not-null="true"/>
     <property column="data_entrega" type="DateTime" name="DataEntrega" />
+
+    <bag name="Itens" inverse="true" lazy="false" cascade="all-delete-orphan">
+      <key column="id_pedido" />
+      <one-to-many class="ItemPedido" />
+    </bag>
     
   </class>
 </hibernate-mapping>

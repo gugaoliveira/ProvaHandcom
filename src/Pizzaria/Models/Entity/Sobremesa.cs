@@ -1,5 +1,6 @@
 ﻿using Pizzaria.Models.Entity;
 using Pizzaria.Models.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Entity
 {
@@ -12,6 +13,7 @@ namespace Pizzaria.Models.Entity
         /// <summary>
         /// Tipo de sobremesa. Ex.: brigadeiro, beijinho ou palha italiana
         /// </summary>
+        [Display(Name = "Tipo")]
         public virtual TipoSobremesa Tipo { get; set; }      
     }
 }

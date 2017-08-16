@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,19 +11,22 @@ namespace Pizzaria.Models.Enum
 	/// </summary>
 	public enum TipoBebida
 	{
-		/// <summary>
-		/// Refrigerante. Ex.: coca-cola, guaraná
-		/// </summary>
-		Refrigerante = 1,
+        /// <summary>
+        /// Refrigerante. Ex.: coca-cola, guaraná
+        /// </summary>
+        [Display(Name = "Refrigerante")]
+        Refrigerante = 1,
 
-		/// <summary>
-		/// Água mineral
-		/// </summary>
-		Agua = 2,
+        /// <summary>
+        /// Água mineral
+        /// </summary>
+        [Display(Name = "Agua")]
+        Agua = 2,
 
-		/// <summary>
-		/// Cerveja
-		/// </summary>
-		Cerveja = 3
+        /// <summary>
+        /// Cerveja
+        /// </summary>
+        [Display(Name = "Cerveja")]
+        Cerveja = 3
 	}
 }

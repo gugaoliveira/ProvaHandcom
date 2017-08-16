@@ -1,0 +1,151 @@
+﻿@model Pizzaria.Models.Entity.Pedido
+
+@{
+    ViewBag.Title = "Cadastro de Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+        <h4>Pedido</h4>
+        <hr/>Cliente: @Model.Cliente.Nome
+
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPedido, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.DataPedido, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataPedido)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataEntrega, new { @class = "form-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.DataEntrega, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataEntrega)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Produto(s):")
+                <div id="linha-mais-produto">
+                    <div class="row">
+                        <input type="hidden" name="id-produto" />
+                        <div class="col-md-5">
+                            @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.Produto, "Selecione o produto", new { @class = "control-control" })
+                        </div>
+                        <div class="col-md-1">
+                            <input type="text" name="quantidade-produto" class="form-control" />
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="observacao-produto" class="form-control" />
+                        </div>
+                        <div class="col-md-1">
+                            <a class="btn btn-default excluir-produto">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="tb-mais-produto"></div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a id="btn-mais-produto" class="btn btn-default">Adicionar mais produto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-12">
+                    <input type="submit" formaction="@Url.Action("Salvar", "Pedido")" value="Salvar" class="btn btn-default" />
+                    <input type="submit" formaction="@Url.Action("Excluir", "Pedido")" value="Excluir" class="btn btn-default/">
+                </div>
+            </div>
+        </div>
+}
+<div>
+    @Html.ActionLink("Voltar", "Lista")
+</div>
+
+
+<script>
+
+    function adicionarMaisProdutos(id, quantidade, observacao) {
+
+        var $novaLinha = $('#linha-mais-produto').clone();
+        $novaLinha.removeAttr('id');
+        $novaLinha.find('input').prop('disabled', false);
+
+        if (id !== undefined)
+            $novaLinha.find('input[name="id-produto"]').val(id);
+        else
+            $novaLinha.find('input[name="id-produto"]').val(0);
+
+        if (quantidade !== undefined) {
+            $novaLinha.find('input[name="quantidade-produto"]').val(quantidade);
+        }
+
+        if (quantidade == null)
+            $novaLinha.find('input[name="quantidade-produto"]').val(0);
+
+        if (observacao !== undefined) {
+            $novaLinha.find('input[name="observacao-produto"]').val(observacao);
+        }
+
+        if (observacao == null)
+            $novaLinha.find('input[name="observacao-produto"]').val(0);
+
+        $('#tb-mais-produto').append($novaLinha);
+        $novaLinha.show();
+    }
+
+    function preencheItens() {
+
+        $.post('@Url.Action("GetItens", "Pedido")', { id: $('#IdCentroCusto').val() }, function (data) {
+
+            if (data != '') {
+
+                $('#tb-mais-produto').html('');
+
+                var itens = JSON.parse(data);
+
+                if (itens.length > 0) {
+                    for (var i = 0; i < itens.length; i++) {
+                        adicionarMaisProdutos(itens[i].Id, itens[i].Quantidade, itens[i].Observacao);
+                    }                   
+                }
+            }
+        });
+    }
+
+    $(document).ready(function () {
+
+        if ('@Model.Itens.Count' > 0) { //Exibe os itens dentro do pedido
+            preencheItens();
+        }
+
+        $('#btn-mais-produto').click(function () { adicionarMaisProdutos(); });
+
+        $('#tb-mais-produto').on('click', '.excluir-produto', function () {
+            var self = $(this);
+            self.closest('.row').remove();
+        });
+
+    });
+
+    //Remove a linha de modelo do form
+    jQuery('form#frm-mais-produto').submit(function (e) {
+        var form = $(this);
+        if (form.valid()) {
+            var linhaModelo = $('#linha-mais-produto');
+            if (!linhaModelo.is(":visible")) {
+                linhaModelo.remove();
+            }
+        }
+    });
+
+</script>

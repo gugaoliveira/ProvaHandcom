@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,10 +14,15 @@ namespace Pizzaria.Models.Enum
         /// <summary>
 		/// Tamanho da pizza
 		/// </summary>
-		Brotinho = 1,
-		Pequena = 2,
-		Media = 3,
-		Grande = 4,
-		Familia = 5
+		[Display(Name = "Brotinho")]
+        Brotinho = 1,
+        [Display(Name = "Pequena")]
+        Pequena = 2,
+        [Display(Name = "Média")]
+        Media = 3,
+        [Display(Name = "Grande")]
+        Grande = 4,
+        [Display(Name = "Família")]
+        Familia = 5
 	}
 }

@@ -8,7 +8,7 @@
       NHibernate.Driver.SqlClientDriver
     </property>
     <property name="connection.connection_string">
-	  Server=.\SQLEXPRESS;database=pizzaria;Integrated Security=SSPI;
+	  Server=localhost;database=pizzaria;Integrated Security=SSPI;
 	</property>
     <property name="dialect">
       NHibernate.Dialect.MsSql2012Dialect
