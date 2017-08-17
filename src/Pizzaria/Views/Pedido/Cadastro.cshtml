@@ -115,27 +115,26 @@
     @Html.ActionLink("Voltar", "Lista")
 </div>
 
-<div id="modalAdicionarItens" class="modal fade" role="dialog" style="display: table;  margin: 0 auto; width: 500px;">
+<div id="modalAdicionarItens" class="modal fade" role="dialog" style="display: table;  margin: 0 auto; width: 300px;">
     <div class="modal-dialog"></div>
 </div>
 
 <script>
+
+    $("body").on("click",'#btn-mais-produto', function () {
+        var url = "@Url.Action("NovoItemPedido", "ItemPedido")";
+
+        $.post(url, { idPedido: $("#Id").val() }, function (data) {
+            $("#modalAdicionarItens").html(data);
+            $("#modalAdicionarItens").modal();
+        });
+    });
 
     $(document).ready(function ($) {
 
         $('#DataEntrega').mask('99/99/9999 00:00:00');
 
         $('#DataPedido').mask('99/99/9999 00:00:00');
-
-        $("body").on("click",'#btn-mais-produto', function () {
-            var url = "@Url.Action("NovoItemPedido", "ItemPedido")";
-
-            $.post(url, { idPedido: $("#Id").val() }, function (data)
-            {
-                $("#modalAdicionarItens").html(data);
-                $("#modalAdicionarItens").modal();
-            });
-        });
 
         $('body').on('click', '.remover-produto', function () {
             var idItemPedido = $(this).data('id');
