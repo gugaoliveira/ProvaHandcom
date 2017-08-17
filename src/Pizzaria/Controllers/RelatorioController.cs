@@ -11,7 +11,7 @@ namespace Pizzaria.Controllers
         /// <summary>
         /// Página de relatório
         /// </summary>
-        public ActionResult Lista(int idCliente)
+        public ActionResult Lista(int idCliente = -1)
         {
             var listaCliente = new RepositoryDAO<Cliente>().ListAll(c => c.Nome);
 
