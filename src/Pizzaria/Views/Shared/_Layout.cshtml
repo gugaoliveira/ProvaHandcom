@@ -40,7 +40,7 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Pedidos", "Lista", "Pedido")</li>
-                    <li>@Html.ActionLink("Relatórios", "Lista", "Relatorio")</li>
+                    <li> @Html.ActionLink("Relatórios", "Lista", "Relatorio", routeValues: new {idCliente = "-1" }, htmlAttributes: null)</li>
                 </ul>
             </div>
         </div>

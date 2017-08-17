@@ -49,5 +49,27 @@ namespace Pizzaria.Models.DAO
                 }
             }
         }
+
+        /// <summary>
+        /// Retorna pedidos do cliente
+        /// </summary>
+        public List<Pedido> GetPedidoCliente(int idCliente)
+        {
+            using (ISession session = NHibernateConfig.OpenSession())
+            {
+                try
+                {
+                    return session.Query<Pedido>()
+                        .Where(pedido => pedido.Cliente.Id == idCliente)
+                        .FetchMany(pedido => pedido.Itens)
+                        .ThenFetch(itemPedido => itemPedido.Produto)
+                        .ToList();
+                }
+                catch (HibernateException hex)
+                {
+                    throw hex;
+                }
+            }
+        }
     }
 }

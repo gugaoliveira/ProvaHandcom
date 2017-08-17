@@ -29,10 +29,7 @@
             $.post(url, { idCliente: idCliente }, function (data) {
                 $("#modalClientePedido").modal("toggle");
                 var caminho = "/Pedido/Cadastro/" + data;
-                console.log(caminho);
-               
                 window.location.href = caminho; 
-                
             });
 
         });
