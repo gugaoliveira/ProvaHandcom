@@ -1,0 +1,61 @@
+﻿@model Pizzaria.Models.Entity.Bebida
+
+@{
+    ViewBag.Title = "Cadastro de Bebida";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+        <h4>Bebida</h4>
+        <hr/>
+
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descricao, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Descricao, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Preco, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Preco, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Preco)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tipo", new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.EnumDropDownListFor(x => x.Tipo, "Selecione o tipo", new { @class = "form-control" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" formaction="@Url.Action("Salvar", "Bebida")" value="Salvar" class="btn btn-default" />
+                <input type="submit" formaction="@Url.Action("Excluir", "Bebida")" value="Excluir" onclick="return confirm('Confirma exclusão do item?');" class="btn btn-default/">
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Voltar", "Lista")
+</div>
+<script>
+    $(document).ready(function ($) {
+        $('#Preco').mask("#.##0,00", { reverse: true });
+    });
+</script>

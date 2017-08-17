@@ -1,0 +1,163 @@
+﻿@model Pizzaria.Models.Entity.Pedido
+
+@{
+    ViewBag.Title = "Cadastro de Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+        <h4>Pedido</h4>
+        Cliente: @Model.Cliente.Nome
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPedido, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.DataPedido, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataPedido)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataEntrega, new { @class = "form-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.DataEntrega, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataEntrega)
+            </div>
+        </div>
+
+        <div class="form-group table-responsive">
+            @Html.Label("Itens no pedido: ", new { @class = "form-label" })
+            <table class="table .table-hover">
+                @if (Model.Itens.Count > 0)
+                {
+                <tr style="background-color: #f9f9f9;">
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Quantidade
+                    </th>
+                    <th>
+                        Observação
+                    </th>
+                    <th>
+                        Preço
+                    </th>
+                    <th>
+                        Total do item
+                    </th>
+                    <th style="width: 10%; text-align: center"></th>
+                </tr>
+                    foreach (var item in Model.Itens)
+                    {
+                        <tr>
+                            <td>
+                                @item.Produto.Nome
+                            </td>
+                            <td>
+                                @item.Quantidade.ToString()
+                            </td>
+                            <td>
+                                @item.Observacao
+                            </td>
+                            <td>
+                                @("R$ " + item.Produto.Preco.ToString("###,##"))
+                            </td>
+                            <td>
+                                @("R$ " + (item.Produto.Preco * item.Quantidade).ToString("###,##"))
+                            </td>
+                            <td>
+                                <a data-id="@item.Id" class="btn btn-default remover-produto">Remover</a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+                <tr style="background-color: #f9f9f9; font-weight: bold">
+                    <td colspan="1"></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total Pedido</td>
+                    <td>
+                        R$ @Html.DisplayFor(model => model.ValorTotal, new { @class = "form-control" })
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a id="btn-mais-produto" class="btn btn-default">Adicionar itens</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <a id="btn-salvar" class="btn btn-default">Salvar</a>
+                <input type="submit" formaction="@Url.Action("Excluir", "Pedido")" value="Excluir" onclick="return confirm('Confirma exclusão do item?');" class="btn btn-default/">
+            </div>
+        </div>
+    </div>
+
+}
+<div>
+    @Html.ActionLink("Voltar", "Lista")
+</div>
+
+<div id="modalAdicionarItens" class="modal fade" role="dialog" style="display: table;  margin: 0 auto; width: 300px;">
+    <div class="modal-dialog"></div>
+</div>
+
+<script>
+
+    $("body").on("click",'#btn-mais-produto', function () {
+        var url = "@Url.Action("NovoItemPedido", "ItemPedido")";
+
+        $.post(url, { idPedido: $("#Id").val() }, function (data) {
+            $("#modalAdicionarItens").html(data);
+            $("#modalAdicionarItens").modal();
+        });
+    });
+
+    $(document).ready(function ($) {
+
+        $('#DataEntrega').mask('99/99/9999 00:00:00');
+
+        $('#DataPedido').mask('99/99/9999 00:00:00');
+
+        $('body').on('click', '.remover-produto', function () {
+            var idItemPedido = $(this).data('id');
+            var url = "@Url.Action("Excluir", "ItemPedido")";
+
+            $.post(url, { idItemPedido: idItemPedido }, function (data) {
+                window.location.reload();
+            });
+        });
+
+        $("body").on("click", '#btn-salvar', function () {
+            var url = "@Url.Action("Salvar", "Pedido")";
+
+            $.post(url, { idPedido: $("#Id").val(), dataPedido: $("#DataPedido").val(), dataEntrega: $("#DataEntrega").val() }, function (data) {
+                if (data == ""){
+                    alert("Data de entrega deve ser no mínimo 30 minutos depois da data do pedido");
+                    return;
+                }
+                else{
+                    window.location.reload();
+                }
+            });
+        });
+    });
+    
+</script>

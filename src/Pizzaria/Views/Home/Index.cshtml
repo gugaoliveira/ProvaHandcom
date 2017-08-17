@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Borracharia e Pizzaria do Geraldo</h1>
+    <p class="lead">Sistema de gerenciamento de pedidos</p>   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Clientes</h2>
+        <p>
+            Mostrar lista de clientes cadastrados.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Lista", "Cliente")">Veja mais &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Pedidos</h2>
+        <p>Mostrar pedidos.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Lista", "Pedido")">Veja mais &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Relatórios</h2>
+        <p>Relatório com todos os clientes, pedidos, e itens já cadastrados.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Lista", "Relatorio")">Veja mais &raquo;</a></p>
+    </div>
+</div>

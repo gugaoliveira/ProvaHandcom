@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Pizzaria.Models.Entity.Produto>
+@{
+    ViewBag.Title = "Lista de Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="table-responsive">
+    <h2>Lista de Produtos</h2>
+    <p>
+        @Html.ActionLink("Nova pizza", "Cadastro", "Pizza") | 
+        @Html.ActionLink("Novo bebiba", "Cadastro", "Bebida") |
+        @Html.ActionLink("Novo sobremesa", "Cadastro", "Sobremesa")
+    </p>
+    <table class="table table-striped .table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Cadastro", new { id = item.Id }) |
+                    @Html.ActionLink("Excluir", "Excluir", new { id = item.Id }, new { onclick = "return confirm('Confirma exclusão do item?');" })
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>

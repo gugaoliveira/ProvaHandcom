@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Pizzaria" namespace="Pizzaria.Models.Entity" >
+  <class name="Pedido" table="pz_pedido">
+
+    <id name="Id" column="id_pedido" type="Int32" unsaved-value="0">
+      <generator class="native"/>
+    </id>
+    <many-to-one name="Cliente" column="id_cliente" class="Cliente" lazy="false"/>
+    <property column="data_pedido" type="DateTime" name="DataPedido" not-null="true"/>
+    <property column="data_entrega" type="DateTime" name="DataEntrega" />
+
+    <bag name="Itens" inverse="true" lazy="false" cascade="all-delete-orphan">
+      <key column="id_pedido" />
+      <one-to-many class="ItemPedido" />
+    </bag>
+    
+  </class>
+</hibernate-mapping>

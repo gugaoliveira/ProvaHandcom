@@ -1,0 +1,139 @@
+﻿@model Pizzaria.Models.Entity.Cliente
+
+@{
+    ViewBag.Title = "Cadastro de Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Endereco.Cidade.Id)
+    
+    <div class="form-horizontal">
+        <h4>Cliente</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cpf, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Cpf, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Cpf)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Telefone)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Endereco.Logradouro)
+            </div>
+        </div>
+      
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Logradouro, new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Endereco.Logradouro, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Numero, new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Endereco.Numero, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Endereco.Numero)
+                </div>
+            </div>
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.Endereco.Complemento, new { @class = "control-label" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.Endereco.Complemento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Endereco.Complemento)
+            </div>
+        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Bairro, new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Endereco.Bairro, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Endereco.Bairro)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Cep, new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Endereco.Cep, new { @class = "form-control" })
+                </div>
+            </div>  
+
+            <div class="form-group">
+                @Html.Label("Cidade", new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.DropDownList("IdCidade", (IEnumerable<SelectListItem>)ViewBag.Cidade, "Selecione a cidade")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-12">
+                    <input type="submit" formaction="@Url.Action("Salvar", "Cliente")" value="Salvar" class="btn btn-default" />
+                    <input type="submit" formaction="@Url.Action("Excluir", "Cliente")" value="Excluir" onclick="return confirm('Confirma exclusão do item?');" class="btn btn-default/">
+                </div>
+            </div>
+        </div>
+}
+<div>
+    @Html.ActionLink("Voltar", "Lista")
+</div>
+
+<script>
+
+    $(document).ready(function ($) {
+        $('#Telefone').mask('(00) 0000-00009');
+        $('#Telefone').blur(function (event) {
+            if ($(this).val().length == 15) { // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+                $('#Telefone').mask('(00) 00000-0009');
+            } else {
+                $('#Telefone').mask('(00) 0000-00009');
+            }
+        });
+        $('#Cpf').mask('000.000.000-09');
+        $('#Cpf').blur(function (event) {
+            if ($(this).val().length == 14) {
+                $('#Cpf').mask('000.000.000-09');
+            } else {
+                $('#Cpf').mask('000.000.000-09');
+            }
+        });
+
+        $('#Endereco_Cep').mask('00000-009');
+        $('#Endereco_Cep').blur(function (event) {
+            if ($(this).val().length == 14) {
+                $('#Endereco_Cep').mask('00000-009');
+            } else {
+                $('#Endereco_Cep').mask('00000-009');
+            }
+        });
+
+
+        $("body").on("change", "#IdCidade", function () {
+            // Setar id da cidade
+            $("#Endereco_Cidade_Id").val($(this).val());
+        });
+    });
+
+</script>
