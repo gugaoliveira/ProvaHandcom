@@ -2,7 +2,6 @@
 using Pizzaria.Models.DAO;
 using Pizzaria.Models.Entity;
 using Pizzaria.Models.Enum;
-using System.Collections.Generic;
 
 namespace Pizzaria.Controllers
 {

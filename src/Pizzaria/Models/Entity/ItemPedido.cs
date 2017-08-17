@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Entity
 {
@@ -24,16 +21,19 @@ namespace Pizzaria.Models.Entity
         /// <summary>
         /// Quantidade de itens
         /// </summary>
+        [Display(Name = "Quantidade")]
         public virtual int Quantidade { get; set; }
 
         /// <summary>
         /// Observacao do item
         /// </summary>
+        [Display(Name = "Observação")]
         public virtual string Observacao { get; set; }
 
         /// <summary>
         /// Produto ex.: pizza, bebida ou sobremesa
         /// </summary>
+        [Display(Name = "Produto")]
         public virtual Produto Produto { get; set; }
 
         public virtual Pedido Pedido { get; set; }

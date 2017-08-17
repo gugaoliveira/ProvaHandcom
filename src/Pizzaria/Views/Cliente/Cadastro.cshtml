@@ -91,7 +91,7 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-12">
                     <input type="submit" formaction="@Url.Action("Salvar", "Cliente")" value="Salvar" class="btn btn-default" />
-                    <input type="submit" formaction="@Url.Action("Excluir", "Cliente")" value="Excluir" class="btn btn-default/">
+                    <input type="submit" formaction="@Url.Action("Excluir", "Cliente")" value="Excluir" onclick="return confirm('Confirma exclusão do item?');" class="btn btn-default/">
                 </div>
             </div>
         </div>
@@ -102,7 +102,34 @@
 
 <script>
 
-    $(document).ready(function () {
+    $(document).ready(function ($) {
+        $('#Telefone').mask('(00) 0000-00009');
+        $('#Telefone').blur(function (event) {
+            if ($(this).val().length == 15) { // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+                $('#Telefone').mask('(00) 00000-0009');
+            } else {
+                $('#Telefone').mask('(00) 0000-00009');
+            }
+        });
+        $('#Cpf').mask('000.000.000-09');
+        $('#Cpf').blur(function (event) {
+            if ($(this).val().length == 14) {
+                $('#Cpf').mask('000.000.000-09');
+            } else {
+                $('#Cpf').mask('000.000.000-09');
+            }
+        });
+
+        $('#Endereco_Cep').mask('00000-009');
+        $('#Endereco_Cep').blur(function (event) {
+            if ($(this).val().length == 14) {
+                $('#Endereco_Cep').mask('00000-009');
+            } else {
+                $('#Endereco_Cep').mask('00000-009');
+            }
+        });
+
+
         $("body").on("change", "#IdCidade", function () {
             // Setar id da cidade
             $("#Endereco_Cidade_Id").val($(this).val());

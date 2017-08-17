@@ -30,13 +30,14 @@ namespace Pizzaria.Models.Entity
         /// <summary>
         /// Data e hora em que o pedido foi criado
         /// </summary>
-        [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "A data de início é obrigatória")]
+        [Display(Name = "Data do pedido")]
         public virtual DateTime DataPedido { get; set; } = DateTime.Now;
 
         /// <summary>
         /// Data e hora em que o pedido foi entregue
         /// </summary>
-        [DataType(DataType.DateTime)]
+        [Display(Name = "Data da Entrega")]
         public virtual DateTime? DataEntrega { get; set; }
 
 		/// <summary>
@@ -44,10 +45,11 @@ namespace Pizzaria.Models.Entity
 		/// </summary>
 		public virtual IList<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
 
-		/// <summary>
-		/// Valor total do pedido
-		/// </summary>
-		public virtual decimal ValorTotal
+        /// <summary>
+        /// Valor total do pedido
+        /// </summary>
+        [Display(Name = "Valor total")]
+        public virtual decimal ValorTotal
 		{
 			get
 			{

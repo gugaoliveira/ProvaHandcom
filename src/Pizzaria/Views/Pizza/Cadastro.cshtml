@@ -53,7 +53,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-12">
                 <input type="submit" formaction="@Url.Action("Salvar", "Pizza")" value="Salvar" class="btn btn-default" />
-                <input type="submit" formaction="@Url.Action("Excluir", "Pizza")" value="Excluir" class="btn btn-default/">
+                <input type="submit" formaction="@Url.Action("Excluir", "Pizza")" value="Excluir" onclick="return confirm('Confirma exclusão do item?');" class="btn btn-default/">
             </div>
         </div>
     </div>
@@ -61,3 +61,9 @@
 <div>
     @Html.ActionLink("Voltar", "Lista")
 </div>
+
+<script>
+    $(document).ready(function ($) {
+        $('#Preco').mask("#.##0,00", { reverse: true });        
+    });
+</script>

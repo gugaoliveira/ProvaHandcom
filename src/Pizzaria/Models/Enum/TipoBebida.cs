@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Enum
 {
@@ -20,7 +16,7 @@ namespace Pizzaria.Models.Enum
         /// <summary>
         /// Água mineral
         /// </summary>
-        [Display(Name = "Agua")]
+        [Display(Name = "Água")]
         Agua = 2,
 
         /// <summary>

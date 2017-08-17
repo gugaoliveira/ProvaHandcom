@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Cadastro", new { id = item.Id }) |
-                    @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+                    @Html.ActionLink("Excluir", "Excluir", new { id = item.Id }, new { onclick = "return confirm('Confirma exclusão do item?');" })
                 </td>
             </tr>
         }

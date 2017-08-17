@@ -1,4 +1,5 @@
-﻿using Pizzaria.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations;
+using Pizzaria.Models.Enum;
 
 namespace Pizzaria.Models.Entity
 {
@@ -7,9 +8,10 @@ namespace Pizzaria.Models.Entity
 	/// </summary>
     public class Bebida : Produto
     {
-		/// <summary>
-		/// Tipo da bebida. Ex.: água, refrigerante ou cerveja
-		/// </summary>
+        /// <summary>
+        /// Tipo da bebida. Ex.: água, refrigerante ou cerveja
+        /// </summary>
+        [Display(Name = "Tipo")]
         public virtual TipoBebida Tipo { get; set; }   
     }
 }

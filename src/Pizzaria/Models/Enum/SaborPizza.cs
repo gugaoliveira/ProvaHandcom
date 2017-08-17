@@ -34,7 +34,7 @@ namespace Pizzaria.Models.Enum
         PeitoDePeru = 12,
         [Display(Name = "Pepperoni")]
         Pepperoni = 13,
-        [Display(Name = "FrangoCheddar")]
+        [Display(Name = "Frango com Cheddar")]
         FrangoCheddar = 14,
         [Display(Name = "Parisiense")]
         Parisiense = 15,
@@ -42,9 +42,9 @@ namespace Pizzaria.Models.Enum
         Banana = 16,
         [Display(Name = "Chocolate")]
         Chocolate = 17,
-        [Display(Name = "Prestigio")]
+        [Display(Name = "Prestígio")]
         Prestigio = 18,
-        [Display(Name = "RomeuJulieta")]
+        [Display(Name = "Romeu e Julieta")]
         RomeuJulieta = 19,
         [Display(Name = "Morango")]
         Morango = 20

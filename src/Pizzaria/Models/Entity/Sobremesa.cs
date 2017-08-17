@@ -1,5 +1,4 @@
-﻿using Pizzaria.Models.Entity;
-using Pizzaria.Models.Enum;
+﻿using Pizzaria.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace Pizzaria.Models.Entity

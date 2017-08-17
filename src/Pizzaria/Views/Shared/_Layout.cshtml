@@ -6,9 +6,13 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/inputmask")
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/jquery.maskedinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,9 +32,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produto <b class="caret"></b></a>
                         <ul class="dropdown-menu multi-level">
                             <li class="dropdown-submenu">
-                                <a>@Html.ActionLink("Pizza", "Lista", "Pizza")</a>
-                                <a>@Html.ActionLink("Bebida", "Lista", "Bebida")</a>
-                                <a>@Html.ActionLink("Sobremesa", "Lista", "Sobremesa")</a>
+                                @Html.ActionLink("Pizza", "Lista", "Pizza")
+                                @Html.ActionLink("Bebida", "Lista", "Bebida")
+                                @Html.ActionLink("Sobremesa", "Lista", "Sobremesa")
+                                @Html.ActionLink("Produtos", "Lista", "Produto")
                             </li>
                         </ul>
                     </li>

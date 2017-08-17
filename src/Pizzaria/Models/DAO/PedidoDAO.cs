@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using NHibernate;
 using NHibernate.Linq;
 using Pizzaria.Models.Entity;
-using System.Linq.Expressions;
 
 namespace Pizzaria.Models.DAO
 {
@@ -20,14 +17,6 @@ namespace Pizzaria.Models.DAO
             {
                 try
                 {
-                    //IQueryable<Pedido> queryable = (from pedido in session.Query<Pedido>()
-                    //								join cliente in session.Query<Cliente>() on pedido.Cliente equals cliente
-                    //								where cliente.Nome == "Tais pig"
-                    //								orderby pedido.Id descending 
-                    //								select pedido);
-
-                    //Pedido a = queryable.First();
-
                     return session.Query<Pedido>()
                         .FetchMany(pedido => pedido.Itens)
                         .ThenFetch(itemPedido => itemPedido.Produto)

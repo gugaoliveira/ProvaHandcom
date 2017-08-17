@@ -1,2 +1,3 @@
 10/08 - 12/08: Modelagem e mapeamento do banco de dados
 12/08 - 15/08: Cadastro de cliente e produtos
+15/08 - 16/08: Cadastro de pedidos

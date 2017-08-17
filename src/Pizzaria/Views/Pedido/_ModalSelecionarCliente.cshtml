@@ -5,12 +5,14 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Selecione um cliente</h4>
     </div>
+<div style="padding-left: 15px">
     <div class="form-group">
         @Html.Label("Cliente", new { @class = "control-label" })
         <div class="col-md-12">
             @Html.DropDownList("IdCliente", (IEnumerable<SelectListItem>)ViewBag.Cliente, "Selecione o cliente")
             @Html.ValidationMessage("IdCliente")
         </div>
+    </div>
     </div>
     <div class="modal-footer">
         <a id="btn-ok" class="btn btn-default">Ok</a>
@@ -21,16 +23,17 @@
 <script>
 
     $("#btn-ok").on("click", function () {
-            var url = "@Url.Action("CadastroPedidoCliente", "Pedido")";
+        var url = "@Url.Action("CadastroPedidoCliente", "Pedido")";
             var idCliente = $("#IdCliente").val();
 
-            $.post(url, { idCliente: idCliente }, function (data)
-            {
-                console.log(data.val);
-                console.log(data);
-                console.log(data.console);
+            $.post(url, { idCliente: idCliente }, function (data) {
                 $("#modalClientePedido").modal("toggle");
+                var caminho = "/Pedido/Cadastro/" + data;
+                console.log(caminho);
+               
+                window.location.href = caminho; 
+                
             });
-            
+
         });
 </script>

@@ -1,78 +1,51 @@
 ﻿using System.Web.Mvc;
 using Pizzaria.Models.DAO;
 using Pizzaria.Models.Entity;
-using NHibernate.Criterion;
 using System;
-using Pizzaria.Models.Enum;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Pizzaria.Controllers
 {
     public class PedidoController : Controller
     {
+        private PedidoDAO pedidoDAO = new PedidoDAO();
+
         /// <summary>
-        /// Página inicial do sistema
+        /// Página com todos os pedidos
         /// </summary>
         public ActionResult Lista()
         {
-            //var cliente = new RepositoryDAO<Cliente>().Get(3);
-
-            //var b = new Pedido(cliente);
-            //b.Itens = new List<ItemPedido>{
-            //    new ItemPedido(b)
-            //    {
-            //        Produto = new RepositoryDAO<Produto>().Get(1),
-            //        Quantidade = 2,
-            //        Observacao = "sem pimentao"
-            //    }
-            //};
-
-            //new PedidoDAO().Create(b);
-            var listaCliente = new RepositoryDAO<Cliente>().ListAll(c => c.Nome, Ordem.Asc);
-
-            ViewBag.Cliente = new SelectList(
-                listaCliente,
-                "Id",
-                "Nome"
-            );
-
-
-            var pedido = new PedidoDAO().GetPedidosComItens();
+            var pedido = pedidoDAO.GetPedidosComItens();
 
             return View(pedido);
         }
 
         /// <summary>
-        /// Cadastro da pizza
+        /// Cadastro de pedidos
         /// </summary>
         public ActionResult Cadastro(int id)
         {
-            var pedido = new PedidoDAO().GetPedidoById(id);
-
-            var listaProduto = new RepositoryDAO<Produto>().ListAll(c => c.Nome, Ordem.Asc);
-            
-            ViewBag.Produto = new SelectList(
-                listaProduto,
-                "Id",
-                "Nome"
-            );
+            var pedido = pedidoDAO.GetPedidoById(id);
             
             return View(pedido);
         }
 
-        public ActionResult CadastroPedidoCliente(int idCliente)
+        /// <summary>
+        /// Cadastro de cliente para poder cadastrar um pedido
+        /// </summary>
+        public int CadastroPedidoCliente(int idCliente)
         {
             var cliente = new RepositoryDAO<Cliente>().ListOneWhere(c => c.Id == idCliente);
             var pedido = new Pedido(cliente);
-            new PedidoDAO().Create(pedido);
+            pedidoDAO.Create(pedido);
             
-            return RedirectToAction("Cadastro", new { id = pedido.Id });
+            return pedido.Id;
         }
 
+        /// <summary>
+        /// Action que renderiza modal para selecionar um cliente
+        /// </summary>
         public PartialViewResult SelecionarCliente()
         {
-            var listaCliente = new RepositoryDAO<Cliente>().ListAll(c => c.Nome, Ordem.Asc);
+            var listaCliente = new RepositoryDAO<Cliente>().ListAll(c => c.Nome);
 
             ViewBag.Cliente = new SelectList(
                 listaCliente,
@@ -83,7 +56,36 @@ namespace Pizzaria.Controllers
             return PartialView("_ModalSelecionarCliente");
         }
 
+        /// <summary>
+        /// Salvar um pedido
+        /// </summary>
+        public ActionResult Salvar(int idPedido, DateTime dataPedido, DateTime dataEntrega)
+        {
 
-        
+            if (dataEntrega < dataPedido.AddMinutes(30))
+            {
+                //Data de entrega deve ser no mínimo 30 minutos depois da data do pedido
+                return null;
+            }
+
+            Pedido pedido = pedidoDAO.GetPedidoById(idPedido);
+            pedido.DataPedido = dataPedido;
+            pedido.DataEntrega = dataEntrega;
+            pedidoDAO.Update(pedido);
+
+            return RedirectToAction("Cadastro", pedido);
+        }
+
+        /// <summary>
+        /// Excluir pedido
+        /// </summary>
+        public ActionResult Excluir(int id)
+        {
+            var pedido = pedidoDAO.GetPedidoById(id);
+            pedidoDAO.Delete(pedido);
+
+            return RedirectToAction("Lista");
+        }
+
     }
 }

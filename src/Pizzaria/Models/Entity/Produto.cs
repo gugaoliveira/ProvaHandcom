@@ -26,8 +26,9 @@ namespace Pizzaria.Models.Entity
 
         /// <summary>
         /// Preço do produto
-        /// </summary>
-        [Display(Name = "Preço")]
+        /// </summary>        
+        [Required]
+        [Display(Name = "Preço")]        
         public virtual decimal Preco { get; set; }
 	}
 }

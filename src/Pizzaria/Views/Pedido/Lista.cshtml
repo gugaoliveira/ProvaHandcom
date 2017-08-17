@@ -7,7 +7,7 @@
 <div class="table-responsive">
     <h2>Lista de Pedidos</h2>
     <p>
-        <a id="novo" style="cursor: pointer">Novo pedido</a>
+        <a id="novo-pedido" style="cursor: pointer">Novo pedido</a>
     </p>
     <table class="table table-striped .table-hover">
         <tr>
@@ -15,10 +15,10 @@
                 @Html.DisplayNameFor(model => model.Cliente.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataEntrega)
+                @Html.DisplayNameFor(model => model.DataPedido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataPedido)
+                @Html.DisplayNameFor(model => model.DataEntrega)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ValorTotal)
@@ -32,17 +32,17 @@
                     @Html.DisplayFor(modelItem => item.Cliente.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataEntrega)
+                    @Html.DisplayFor(modelItem => item.DataPedido)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataPedido)
+                    @Html.DisplayFor(modelItem => item.DataEntrega)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ValorTotal)
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "Cadastro", new { id = item.Id }) |
-                    @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+                    @Html.ActionLink("Excluir", "Excluir", new { id = item.Id }, new { onclick = "return confirm('Confirma exclusão do item?');" })
                 </td>
             </tr>
         }
@@ -56,7 +56,7 @@
 <script>
     $(document).ready(function () {
 
-        $("body").on("click", "#novo", function () {
+        $("body").on("click", "#novo-pedido", function () {
             var url = "@Url.Action("SelecionarCliente", "Pedido")";
             $.post(url, function (data)
             {
